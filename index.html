@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biografia Musical — Rafael Cordeiro</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #e0e0e0;
+            overflow-x: hidden;
+        }
+
+        /* === VIDEO GATE === */
+        #video-gate {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+        }
+        #video-gate.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+        #video-gate h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: #888;
+            margin-bottom: 2rem;
+        }
+        #gate-video {
+            max-width: 90vw;
+            max-height: 70vh;
+            border-radius: 8px;
+            box-shadow: 0 0 60px rgba(139, 92, 246, 0.3);
+        }
+        #skip-btn {
+            margin-top: 2rem;
+            padding: 0.6rem 2rem;
+            background: transparent;
+            border: 1px solid #444;
+            color: #666;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            opacity: 0;
+            animation: fadeSkip 1s ease 5s forwards;
+        }
+        #skip-btn:hover { border-color: #8b5cf6; color: #8b5cf6; }
+        @keyframes fadeSkip { to { opacity: 1; } }
+
+        /* === MAIN CONTENT === */
+        main {
+            opacity: 0;
+            transition: opacity 1s ease 0.3s;
+        }
+        main.visible { opacity: 1; }
+
+        /* === HERO === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 30%, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+        }
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+            background: linear-gradient(135deg, #fff 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+        .hero p {
+            font-size: clamp(1rem, 2.5vw, 1.3rem);
+            font-weight: 300;
+            color: #999;
+            max-width: 500px;
+            line-height: 1.6;
+        }
+        .scroll-hint {
+            position: absolute;
+            bottom: 2rem;
+            animation: bounce 2s ease infinite;
+            color: #555;
+            font-size: 1.5rem;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(10px); }
+        }
+
+        /* === SECTIONS === */
+        section {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 6rem 2rem;
+        }
+        section h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+        section h2 span {
+            color: #8b5cf6;
+        }
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: #666;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            margin-bottom: 2.5rem;
+        }
+        section p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #bbb;
+            margin-bottom: 1.5rem;
+        }
+
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, #8b5cf6, #ec4899);
+            margin: 4rem auto;
+            border-radius: 2px;
+        }
+
+        /* === PERSONALITY GRID === */
+        .personality-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .trait-card {
+            background: rgba(139, 92, 246, 0.06);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        .trait-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(139, 92, 246, 0.4);
+        }
+        .trait-card .icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .trait-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.4rem;
+        }
+        .trait-card p {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        /* === SPOTIFY EMBED === */
+        .playlist-container {
+            margin-top: 2rem;
+        }
+        .playlist-container iframe {
+            width: 100%;
+            border-radius: 12px;
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+
+        /* === FOOD SECTION === */
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        .food-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+        .food-card:hover { transform: translateY(-4px); }
+        .food-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .food-card .info {
+            padding: 1.2rem;
+        }
+        .food-card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.3rem;
+        }
+        .food-card p {
+            font-size: 0.85rem;
+            color: #888;
+            margin: 0;
+        }
+
+        /* === QUOTE === */
+        .quote-block {
+            background: rgba(139, 92, 246, 0.06);
+            border-left: 3px solid #8b5cf6;
+            padding: 2rem;
+            border-radius: 0 12px 12px 0;
+            margin: 2rem 0;
+        }
+        .quote-block p {
+            font-size: 1.15rem;
+            font-style: italic;
+            color: #ccc;
+            margin: 0;
+        }
+        .quote-block cite {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #8b5cf6;
+            font-style: normal;
+        }
+
+        /* === FOOTER === */
+        footer {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: #444;
+            font-size: 0.85rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        footer a {
+            color: #8b5cf6;
+            text-decoration: none;
+        }
+
+        /* === SCROLL ANIMATIONS === */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- VIDEO GATE -->
+<div id="video-gate">
+    <h2>Antes de entrar...</h2>
+    <video id="gate-video" controls preload="metadata">
+        <source src="https://raw.githubusercontent.com/WebSrChZ/PROA/master/Atividades/ATV.001.BiografiaMusical/INTJ.SUPREMACY.mp4" type="video/mp4">
+    </video>
+    <button id="skip-btn" onclick="unlockContent()">Pular e entrar</button>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+    <!-- HERO -->
+    <div class="hero">
+        <h1>Biografia Musical</h1>
+        <p>Uma viagem pela musica, personalidade e momentos que definem quem eu sou.</p>
+        <div class="scroll-hint">&#8595;</div>
+    </div>
+
+    <!-- INTJ -->
+    <section class="fade-up">
+        <div class="section-subtitle">Personalidade</div>
+        <h2>INTJ — O <span>Arquiteto</span></h2>
+        <p>
+            Introvertido, Intuitivo, Pensador e Julgador. O tipo INTJ e conhecido por sua
+            mente estrategica, pensamento independente e determinacao silenciosa. Representam
+            cerca de 2% da populacao — raros, mas impactantes.
+        </p>
+        <p>
+            A combinacao de visao de longo prazo com execucao pragmatica faz do INTJ um
+            planejador natural. Cada decisao e calculada, cada passo serve a um objetivo maior.
+        </p>
+        <div class="personality-grid">
+            <div class="trait-card">
+                <div class="icon">&#x1F9E0;</div>
+                <h3>Estrategista</h3>
+                <p>Pensa 10 passos a frente com logica e precisao</p>
+            </div>
+            <div class="trait-card">
+                <div class="icon">&#x1F310;</div>
+                <h3>Visionario</h3>
+                <p>Ve padroes onde outros veem caos</p>
+            </div>
+            <div class="trait-card">
+                <div class="icon">&#x26A1;</div>
+                <h3>Determinado</h3>
+                <p>Obstaculos sao problemas a resolver, nao motivos para parar</p>
+            </div>
+            <div class="trait-card">
+                <div class="icon">&#x1F512;</div>
+                <h3>Reservado</h3>
+                <p>Poucas palavras, muita profundidade</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- PLAYLISTS -->
+    <section class="fade-up">
+        <div class="section-subtitle">Trilha Sonora</div>
+        <h2>As <span>Playlists</span> da Minha Vida</h2>
+        <p>
+            Musica e mais do que som — e contexto, memoria e energia. Cada playlist
+            carrega um momento, um estado de espirito, uma fase.
+        </p>
+
+        <h3 style="color: #fff; margin: 2rem 0 0.5rem; font-size: 1.1rem;">&#127925; Para focar</h3>
+        <p>O som do deep work. Batidas sem distracao, frequencias que alinham o pensamento.</p>
+        <div class="playlist-container">
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX8Uebhn9wzrS" height="152" frameBorder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
+        </div>
+
+        <h3 style="color: #fff; margin: 2rem 0 0.5rem; font-size: 1.1rem;">&#127911; Para sentir</h3>
+        <p>Quando a musica precisa chegar fundo. R&B, soul, e melodias que dizem o que palavras nao conseguem.</p>
+        <div class="playlist-container">
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTwzVdyRpXm1" height="152" frameBorder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
+        </div>
+
+        <h3 style="color: #fff; margin: 2rem 0 0.5rem; font-size: 1.1rem;">&#128293; Para acelerar</h3>
+        <p>Energia pura. O combustivel pra treino, pra codigo, pra quando o modo turbo ativa.</p>
+        <div class="playlist-container">
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX76Wlfdnj7AP" height="152" frameBorder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FOOD -->
+    <section class="fade-up">
+        <div class="section-subtitle">Gastronomia</div>
+        <h2>Sabores que <span>Marcam</span></h2>
+        <p>
+            Boa comida e tao importante quanto boa musica. Aqui estao os pratos que definem
+            meus momentos favoritos a mesa.
+        </p>
+        <div class="food-grid">
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Churrasco" loading="lazy">
+                <div class="info">
+                    <h3>Churrasco</h3>
+                    <p>Picanha na brasa com farofa e vinagrete. Classico e insubstituivel.</p>
+                </div>
+            </div>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&q=80" alt="Sushi" loading="lazy">
+                <div class="info">
+                    <h3>Sushi</h3>
+                    <p>Precisao e equilibrio em cada peca. A arte da culinaria japonesa.</p>
+                </div>
+            </div>
+            <div class="food-card">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Pizza" loading="lazy">
+                <div class="info">
+                    <h3>Pizza Artesanal</h3>
+                    <p>Massa fermentada, molho fresco, queijo derretendo. Conforto puro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- QUOTE -->
+    <section class="fade-up">
+        <div class="section-subtitle">Filosofia</div>
+        <h2>Uma <span>Frase</span></h2>
+        <div class="quote-block">
+            <p>"A mente que se abre a uma nova ideia jamais volta ao seu tamanho original."</p>
+            <cite>— Albert Einstein</cite>
+        </div>
+        <p>
+            Cada playlist, cada sabor, cada traco de personalidade aponta na mesma direcao:
+            construir, aprender, evoluir. Essa biografia musical e um retrato de quem eu sou —
+            e de quem estou me tornando.
+        </p>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>Biografia Musical &mdash; Rafael Cordeiro</p>
+        <p style="margin-top: 0.5rem;"><a href="https://github.com/WebSrChZ" target="_blank">github.com/WebSrChZ</a></p>
+    </footer>
+</main>
+
+<script>
+    const gate = document.getElementById('video-gate');
+    const video = document.getElementById('gate-video');
+    const main = document.querySelector('main');
+
+    video.addEventListener('ended', unlockContent);
+
+    function unlockContent() {
+        gate.classList.add('hidden');
+        main.classList.add('visible');
+        video.pause();
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
