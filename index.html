@@ -3,17 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Biografia Musical — Rafael Cordeiro</title>
+    <title>Biografia Musical — SrChZ</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
+
+        :root {
+            --bg: #050505;
+            --surface: #0d0d0d;
+            --border: rgba(255,255,255,0.06);
+            --text: #e0e0e0;
+            --muted: #666;
+            --accent: #8b5cf6;
+            --accent2: #a78bfa;
+            --pink: #ec4899;
+            --glow: rgba(139, 92, 246, 0.15);
+        }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
-            color: #e0e0e0;
+            background: var(--bg);
+            color: var(--text);
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
         /* === VIDEO GATE === */
@@ -26,51 +39,49 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
+            transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), visibility 1s;
         }
         #video-gate.hidden {
             opacity: 0;
             visibility: hidden;
             pointer-events: none;
         }
-        #video-gate h2 {
-            font-size: 1.2rem;
-            font-weight: 300;
-            letter-spacing: 0.3em;
+        .gate-label {
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.4em;
             text-transform: uppercase;
-            color: #888;
-            margin-bottom: 2rem;
+            color: #444;
+            margin-bottom: 1.5rem;
         }
         #gate-video {
-            max-width: 90vw;
-            max-height: 70vh;
-            border-radius: 8px;
-            box-shadow: 0 0 60px rgba(139, 92, 246, 0.3);
+            max-width: 88vw;
+            max-height: 65vh;
+            border-radius: 12px;
+            box-shadow: 0 0 80px rgba(139, 92, 246, 0.2);
         }
         #skip-btn {
             margin-top: 2rem;
-            padding: 0.6rem 2rem;
+            padding: 0.5rem 1.8rem;
             background: transparent;
-            border: 1px solid #444;
-            color: #666;
+            border: 1px solid #333;
+            color: #555;
             font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             cursor: pointer;
-            border-radius: 4px;
+            border-radius: 6px;
             transition: all 0.3s ease;
             opacity: 0;
-            animation: fadeSkip 1s ease 5s forwards;
+            animation: fadeSkip 0.8s ease 4s forwards;
         }
-        #skip-btn:hover { border-color: #8b5cf6; color: #8b5cf6; }
+        #skip-btn:hover { border-color: var(--accent); color: var(--accent); }
         @keyframes fadeSkip { to { opacity: 1; } }
 
         /* === MAIN CONTENT === */
-        main {
-            opacity: 0;
-            transition: opacity 1s ease 0.3s;
-        }
+        main { opacity: 0; transition: opacity 1.2s ease 0.4s; }
         main.visible { opacity: 1; }
 
         /* === HERO === */
@@ -83,206 +94,369 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            overflow: hidden;
         }
         .hero::before {
             content: '';
             position: absolute;
             inset: 0;
-            background: radial-gradient(ellipse at 50% 30%, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+            background:
+                radial-gradient(ellipse at 30% 20%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at 70% 80%, rgba(236, 72, 153, 0.05) 0%, transparent 50%);
+        }
+        .hero-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
         }
         .hero h1 {
-            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-size: clamp(3rem, 10vw, 6rem);
             font-weight: 900;
-            letter-spacing: -0.02em;
-            line-height: 1.1;
-            background: linear-gradient(135deg, #fff 0%, #8b5cf6 50%, #ec4899 100%);
+            letter-spacing: -0.03em;
+            line-height: 1;
+            background: linear-gradient(135deg, #fff 0%, var(--accent) 60%, var(--pink) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
         }
-        .hero p {
-            font-size: clamp(1rem, 2.5vw, 1.3rem);
+        .hero-sub {
+            font-size: clamp(0.95rem, 2vw, 1.15rem);
             font-weight: 300;
-            color: #999;
-            max-width: 500px;
-            line-height: 1.6;
+            color: #777;
+            max-width: 480px;
+            line-height: 1.7;
         }
-        .scroll-hint {
+        .hero-sub strong { color: #aaa; font-weight: 500; }
+        .scroll-arrow {
             position: absolute;
-            bottom: 2rem;
-            animation: bounce 2s ease infinite;
-            color: #555;
-            font-size: 1.5rem;
+            bottom: 2.5rem;
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--accent), transparent);
+            animation: pulse-down 2s ease infinite;
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(10px); }
+        @keyframes pulse-down {
+            0%, 100% { opacity: 0.3; transform: scaleY(1); }
+            50% { opacity: 0.8; transform: scaleY(1.3); }
         }
 
         /* === SECTIONS === */
         section {
-            max-width: 900px;
+            max-width: 860px;
             margin: 0 auto;
-            padding: 6rem 2rem;
+            padding: 5rem 2rem;
+        }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            opacity: 0.7;
         }
         section h2 {
-            font-size: 1.8rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
             font-weight: 700;
-            margin-bottom: 0.5rem;
             color: #fff;
+            margin-bottom: 1.2rem;
+            letter-spacing: -0.01em;
         }
-        section h2 span {
-            color: #8b5cf6;
-        }
-        .section-subtitle {
-            font-size: 0.9rem;
-            color: #666;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            margin-bottom: 2.5rem;
-        }
+        section h2 .hl { color: var(--accent2); }
         section p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #bbb;
-            margin-bottom: 1.5rem;
+            font-size: 1rem;
+            line-height: 1.85;
+            color: #999;
+            margin-bottom: 1.2rem;
         }
+        section p strong { color: #ccc; font-weight: 500; }
 
         .divider {
-            width: 60px;
-            height: 2px;
-            background: linear-gradient(90deg, #8b5cf6, #ec4899);
-            margin: 4rem auto;
-            border-radius: 2px;
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+            margin: 0 auto;
+            opacity: 0.4;
         }
 
-        /* === PERSONALITY GRID === */
-        .personality-grid {
+        /* === INTJ SECTION === */
+        .intj-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .intj-header h2 { margin-bottom: 0; }
+        .intj-badge {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            background: rgba(139, 92, 246, 0.1);
+            padding: 0.25rem 0.6rem;
+            border-radius: 4px;
+            border: 1px solid rgba(139, 92, 246, 0.2);
+        }
+        .traits {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1rem;
             margin-top: 2rem;
         }
-        .trait-card {
-            background: rgba(139, 92, 246, 0.06);
-            border: 1px solid rgba(139, 92, 246, 0.15);
-            border-radius: 12px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+        .trait {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.3rem;
+            transition: border-color 0.3s ease, transform 0.3s ease;
         }
-        .trait-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(139, 92, 246, 0.4);
+        .trait:hover {
+            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-2px);
         }
-        .trait-card .icon {
-            font-size: 2rem;
-            margin-bottom: 0.8rem;
+        .trait-icon {
+            font-size: 1.4rem;
+            margin-bottom: 0.6rem;
         }
-        .trait-card h3 {
-            font-size: 1rem;
+        .trait h3 {
+            font-size: 0.85rem;
             font-weight: 600;
             color: #fff;
-            margin-bottom: 0.4rem;
+            margin-bottom: 0.3rem;
         }
-        .trait-card p {
-            font-size: 0.85rem;
-            color: #888;
+        .trait p {
+            font-size: 0.78rem;
+            color: var(--muted);
             margin: 0;
             line-height: 1.5;
         }
 
-        /* === SPOTIFY EMBED === */
-        .playlist-container {
-            margin-top: 2rem;
-        }
-        .playlist-container iframe {
-            width: 100%;
+        /* === NOW PLAYING === */
+        .now-playing {
+            background: var(--surface);
+            border: 1px solid var(--border);
             border-radius: 12px;
-            border: 1px solid rgba(139, 92, 246, 0.15);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            margin-bottom: 2.5rem;
+        }
+        .np-bars {
+            display: flex;
+            align-items: flex-end;
+            gap: 3px;
+            height: 20px;
+        }
+        .np-bars span {
+            width: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+            animation: eq 1.2s ease infinite;
+        }
+        .np-bars span:nth-child(1) { height: 8px; animation-delay: 0s; }
+        .np-bars span:nth-child(2) { height: 16px; animation-delay: 0.2s; }
+        .np-bars span:nth-child(3) { height: 12px; animation-delay: 0.4s; }
+        .np-bars span:nth-child(4) { height: 20px; animation-delay: 0.1s; }
+        @keyframes eq {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.4); }
+        }
+        .np-info { flex: 1; }
+        .np-info .np-label {
+            font-size: 0.65rem;
+            font-weight: 500;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 0.2rem;
+        }
+        .np-info .np-track {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+        }
+        .np-info .np-artist {
+            font-size: 0.8rem;
+            color: var(--muted);
         }
 
-        /* === FOOD SECTION === */
+        /* === TRACK LIST === */
+        .track-list {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+        .track-list li {
+            display: flex;
+            align-items: center;
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--border);
+            gap: 1rem;
+        }
+        .track-list li:last-child { border-bottom: none; }
+        .track-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: #444;
+            width: 1.5rem;
+            text-align: right;
+        }
+        .track-info { flex: 1; }
+        .track-name {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #ddd;
+        }
+        .track-artist {
+            font-size: 0.78rem;
+            color: var(--muted);
+        }
+        .track-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            background: rgba(139, 92, 246, 0.08);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        /* === PLAYLISTS === */
+        .playlist-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        .playlist-grid iframe {
+            width: 100%;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+        }
+
+        /* === FOOD === */
         .food-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
         }
         .food-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 12px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
             overflow: hidden;
-            transition: transform 0.3s ease;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
-        .food-card:hover { transform: translateY(-4px); }
+        .food-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(255,255,255,0.1);
+        }
         .food-card img {
             width: 100%;
-            height: 180px;
+            height: 160px;
             object-fit: cover;
         }
-        .food-card .info {
-            padding: 1.2rem;
+        .food-card .fc-body {
+            padding: 1rem;
         }
         .food-card h3 {
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-weight: 600;
             color: #fff;
             margin-bottom: 0.3rem;
         }
         .food-card p {
-            font-size: 0.85rem;
-            color: #888;
+            font-size: 0.78rem;
+            color: var(--muted);
             margin: 0;
         }
 
         /* === QUOTE === */
-        .quote-block {
-            background: rgba(139, 92, 246, 0.06);
-            border-left: 3px solid #8b5cf6;
+        .quote {
+            position: relative;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 2px solid var(--accent);
             padding: 2rem;
-            border-radius: 0 12px 12px 0;
+            border-radius: 0 10px 10px 0;
             margin: 2rem 0;
         }
-        .quote-block p {
-            font-size: 1.15rem;
+        .quote p {
+            font-size: 1.1rem;
             font-style: italic;
             color: #ccc;
             margin: 0;
+            line-height: 1.7;
         }
-        .quote-block cite {
+        .quote cite {
             display: block;
             margin-top: 0.8rem;
-            font-size: 0.85rem;
-            color: #8b5cf6;
+            font-size: 0.8rem;
+            color: var(--accent);
             font-style: normal;
+            font-weight: 500;
         }
+
+        /* === CODE BLOCK === */
+        .bio-code {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 1.5rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.78rem;
+            line-height: 1.8;
+            color: #999;
+            margin: 2rem 0;
+            overflow-x: auto;
+        }
+        .bio-code .key { color: var(--accent2); }
+        .bio-code .val { color: #e0e0e0; }
+        .bio-code .comment { color: #444; }
 
         /* === FOOTER === */
         footer {
             text-align: center;
-            padding: 4rem 2rem;
-            color: #444;
-            font-size: 0.85rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 3rem 2rem;
+            color: #333;
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border);
         }
         footer a {
-            color: #8b5cf6;
+            color: var(--accent);
             text-decoration: none;
+            font-weight: 500;
+        }
+        footer .handle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.1em;
+            color: #444;
+            margin-top: 0.4rem;
         }
 
         /* === SCROLL ANIMATIONS === */
         .fade-up {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
         }
         .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* === RESPONSIVE === */
+        @media (max-width: 600px) {
+            section { padding: 3.5rem 1.2rem; }
+            .traits { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+            .now-playing { flex-direction: column; text-align: center; }
+            .playlist-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -290,86 +464,220 @@
 
 <!-- VIDEO GATE -->
 <div id="video-gate">
-    <h2>Antes de entrar...</h2>
+    <div class="gate-label">antes de entrar</div>
     <video id="gate-video" controls preload="metadata">
         <source src="https://raw.githubusercontent.com/WebSrChZ/PROA/master/Atividades/ATV.001.BiografiaMusical/INTJ.SUPREMACY.mp4" type="video/mp4">
     </video>
-    <button id="skip-btn" onclick="unlockContent()">Pular e entrar</button>
+    <button id="skip-btn" onclick="unlockContent()">pular</button>
 </div>
 
 <!-- MAIN CONTENT -->
 <main>
+
     <!-- HERO -->
     <div class="hero">
-        <h1>Biografia Musical</h1>
-        <p>Uma viagem pela musica, personalidade e momentos que definem quem eu sou.</p>
-        <div class="scroll-hint">&#8595;</div>
+        <div class="hero-tag">// biografia musical</div>
+        <h1>SrChZ</h1>
+        <p class="hero-sub">
+            <strong>Rafael Santos</strong> — a trilha sonora, a mente e os pedacos
+            que montam quem eu sou quando ninguem ta olhando.
+        </p>
+        <div class="scroll-arrow"></div>
     </div>
+
+    <!-- WHO -->
+    <section class="fade-up">
+        <div class="section-label">// identidade</div>
+        <div class="bio-code">
+            <span class="comment">// quem e esse cara</span><br>
+            <span class="key">nome</span>: <span class="val">Rafael Santos</span><br>
+            <span class="key">aka</span>: <span class="val">SrChZ</span><br>
+            <span class="key">tipo</span>: <span class="val">INTJ-A &mdash; O Arquiteto</span><br>
+            <span class="key">stack</span>: <span class="val">JavaScript, Node.js, Supabase, Python, FFmpeg</span><br>
+            <span class="key">empresa</span>: <span class="val">SrChZ Technologies</span><br>
+            <span class="key">projeto</span>: <span class="val">ITS Power &mdash; Ecossistema de Desejo</span><br>
+            <span class="key">formacao</span>: <span class="val">PROA</span><br>
+            <span class="key">musicas_curtidas</span>: <span class="val">2.934</span><br>
+            <span class="key">vibe</span>: <span class="val">slowed + reverb, phonk, trap BR</span><br>
+        </div>
+    </section>
+
+    <div class="divider"></div>
 
     <!-- INTJ -->
     <section class="fade-up">
-        <div class="section-subtitle">Personalidade</div>
-        <h2>INTJ — O <span>Arquiteto</span></h2>
+        <div class="section-label">// personalidade</div>
+        <div class="intj-header">
+            <h2>INTJ — O <span class="hl">Arquiteto</span></h2>
+            <span class="intj-badge">2% da populacao</span>
+        </div>
         <p>
-            Introvertido, Intuitivo, Pensador e Julgador. O tipo INTJ e conhecido por sua
-            mente estrategica, pensamento independente e determinacao silenciosa. Representam
-            cerca de 2% da populacao — raros, mas impactantes.
+            Introvertido, intuitivo, pensador, julgador. O tipo que observa tudo,
+            fala pouco e ja calculou tres cenarios antes de voce terminar a frase.
+            Construo em silencio, entrego no resultado.
         </p>
         <p>
-            A combinacao de visao de longo prazo com execucao pragmatica faz do INTJ um
-            planejador natural. Cada decisao e calculada, cada passo serve a um objetivo maior.
+            Cada linha de codigo, cada beat na playlist, cada decisao — tudo passa pelo
+            mesmo filtro: <strong>faz sentido ou nao faz?</strong> Sem meio-termo. Sem
+            amar pela metade. Sem construir pela metade.
         </p>
-        <div class="personality-grid">
-            <div class="trait-card">
-                <div class="icon">&#x1F9E0;</div>
+        <div class="traits">
+            <div class="trait">
+                <div class="trait-icon">&#x1F9E0;</div>
                 <h3>Estrategista</h3>
-                <p>Pensa 10 passos a frente com logica e precisao</p>
+                <p>Pensa 10 passos a frente enquanto o resto ta no passo 2</p>
             </div>
-            <div class="trait-card">
-                <div class="icon">&#x1F310;</div>
-                <h3>Visionario</h3>
-                <p>Ve padroes onde outros veem caos</p>
+            <div class="trait">
+                <div class="trait-icon">&#x1F50D;</div>
+                <h3>Obsessivo</h3>
+                <p>Quando algo interessa, mergulha ate o fundo — codigo, musica, ideia</p>
             </div>
-            <div class="trait-card">
-                <div class="icon">&#x26A1;</div>
-                <h3>Determinado</h3>
-                <p>Obstaculos sao problemas a resolver, nao motivos para parar</p>
+            <div class="trait">
+                <div class="trait-icon">&#x26A1;</div>
+                <h3>Direto</h3>
+                <p>Zero enrolacao. O resultado fala mais que qualquer discurso</p>
             </div>
-            <div class="trait-card">
-                <div class="icon">&#x1F512;</div>
+            <div class="trait">
+                <div class="trait-icon">&#x1F30C;</div>
                 <h3>Reservado</h3>
-                <p>Poucas palavras, muita profundidade</p>
+                <p>Poucos entram. Quem entra, fica pra sempre</p>
             </div>
         </div>
     </section>
 
     <div class="divider"></div>
 
-    <!-- PLAYLISTS -->
+    <!-- MUSIC -->
     <section class="fade-up">
-        <div class="section-subtitle">Trilha Sonora</div>
-        <h2>As <span>Playlists</span> da Minha Vida</h2>
+        <div class="section-label">// trilha sonora</div>
+        <h2>O que ta <span class="hl">tocando</span></h2>
         <p>
-            Musica e mais do que som — e contexto, memoria e energia. Cada playlist
-            carrega um momento, um estado de espirito, uma fase.
+            2.934 musicas curtidas. Slowed + reverb quando o mundo precisa desacelerar.
+            Phonk quando precisa acelerar. Trap BR quando a energia e brasileira.
+            Sem playlist generica — cada uma e um estado de espirito.
         </p>
 
-        <h3 style="color: #fff; margin: 2rem 0 0.5rem; font-size: 1.1rem;">&#127925; Para focar</h3>
-        <p>O som do deep work. Batidas sem distracao, frequencias que alinham o pensamento.</p>
-        <div class="playlist-container">
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX8Uebhn9wzrS" height="152" frameBorder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
+        <!-- Now Playing -->
+        <div class="now-playing">
+            <div class="np-bars">
+                <span></span><span></span><span></span><span></span>
+            </div>
+            <div class="np-info">
+                <div class="np-label">tocando agora</div>
+                <div class="np-track">Lembranca</div>
+                <div class="np-artist">MC Menor da L, MACIH</div>
+            </div>
         </div>
 
-        <h3 style="color: #fff; margin: 2rem 0 0.5rem; font-size: 1.1rem;">&#127911; Para sentir</h3>
-        <p>Quando a musica precisa chegar fundo. R&B, soul, e melodias que dizem o que palavras nao conseguem.</p>
-        <div class="playlist-container">
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTwzVdyRpXm1" height="152" frameBorder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
-        </div>
+        <!-- Recent Liked -->
+        <h3 style="color: #fff; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Ultimas curtidas</h3>
+        <ul class="track-list">
+            <li>
+                <span class="track-num">01</span>
+                <div class="track-info">
+                    <div class="track-name">Seu Gosto</div>
+                    <div class="track-artist">Sotam, Rob, Prod Gomes</div>
+                </div>
+                <span class="track-tag">trap br</span>
+            </li>
+            <li>
+                <span class="track-num">02</span>
+                <div class="track-info">
+                    <div class="track-name">Sumi</div>
+                    <div class="track-artist">Lywie, Kizuato</div>
+                </div>
+                <span class="track-tag">r&b</span>
+            </li>
+            <li>
+                <span class="track-num">03</span>
+                <div class="track-info">
+                    <div class="track-name">PENSANDO EM MIM</div>
+                    <div class="track-artist">Matchola, 2ZDinizz</div>
+                </div>
+                <span class="track-tag">trap br</span>
+            </li>
+            <li>
+                <span class="track-num">04</span>
+                <div class="track-info">
+                    <div class="track-name">altyn (slowed + reverb)</div>
+                    <div class="track-artist">derealize</div>
+                </div>
+                <span class="track-tag">slowed</span>
+            </li>
+            <li>
+                <span class="track-num">05</span>
+                <div class="track-info">
+                    <div class="track-name">bankai</div>
+                    <div class="track-artist">ptasinski, RJ Pasin</div>
+                </div>
+                <span class="track-tag">phonk</span>
+            </li>
+            <li>
+                <span class="track-num">06</span>
+                <div class="track-info">
+                    <div class="track-name">Destruction Age - Slowed</div>
+                    <div class="track-artist">akiaura, LONOWN, STM</div>
+                </div>
+                <span class="track-tag">slowed</span>
+            </li>
+            <li>
+                <span class="track-num">07</span>
+                <div class="track-info">
+                    <div class="track-name">UNDER THE INFLUENCE</div>
+                    <div class="track-artist">DRIFTMANE, NIGHTDRIVE, Tazzy</div>
+                </div>
+                <span class="track-tag">phonk</span>
+            </li>
+        </ul>
 
-        <h3 style="color: #fff; margin: 2rem 0 0.5rem; font-size: 1.1rem;">&#128293; Para acelerar</h3>
-        <p>Energia pura. O combustivel pra treino, pra codigo, pra quando o modo turbo ativa.</p>
-        <div class="playlist-container">
-            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX76Wlfdnj7AP" height="152" frameBorder="0" allowtransparency="true" allow="encrypted-media" loading="lazy"></iframe>
+        <!-- Playlists -->
+        <h3 style="color: #fff; font-size: 0.9rem; font-weight: 600; margin: 2.5rem 0 0.5rem;">Playlists do Spotify</h3>
+        <p>As playlists que realmente rodam no dia a dia.</p>
+        <div class="playlist-grid">
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0hvSra5lMqA" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="Slowed + Reverb"></iframe>
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX6GJXiuZRisr" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="Phonk"></iframe>
+        </div>
+        <div class="playlist-grid" style="margin-top: 1rem;">
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DWTwzVdyRpXm1" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="R&B"></iframe>
+            <iframe src="https://open.spotify.com/embed/playlist/37i9dQZF1DX76Wlfdnj7AP" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="Trap BR"></iframe>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- ARTISTAS -->
+    <section class="fade-up">
+        <div class="section-label">// artistas em rotacao</div>
+        <h2>Quem <span class="hl">domina</span> meu Spotify</h2>
+        <p>
+            Os nomes que aparecem de novo e de novo nas curtidas. Nao e algoritmo —
+            e gosto construido.
+        </p>
+        <div class="traits">
+            <div class="trait">
+                <h3>LONOWN</h3>
+                <p>Slowed/reverb atmosferico. Aparece em quase tudo</p>
+            </div>
+            <div class="trait">
+                <h3>riserayss</h3>
+                <p>Melodias eternas, R&B underground que cola com LONOWN</p>
+            </div>
+            <div class="trait">
+                <h3>ptasinski + RJ Pasin</h3>
+                <p>Duo que transita entre phonk e beats guitareiros</p>
+            </div>
+            <div class="trait">
+                <h3>MC Menor da L</h3>
+                <p>Trap/funk BR cru. A energia da rua</p>
+            </div>
+            <div class="trait">
+                <h3>IZA</h3>
+                <p>Pop/R&B brasileiro com potencia vocal absurda</p>
+            </div>
+            <div class="trait">
+                <h3>Ana Castela</h3>
+                <p>Sertanejo raiz com energia nova. Boiadeira</p>
+            </div>
         </div>
     </section>
 
@@ -377,32 +685,32 @@
 
     <!-- FOOD -->
     <section class="fade-up">
-        <div class="section-subtitle">Gastronomia</div>
-        <h2>Sabores que <span>Marcam</span></h2>
+        <div class="section-label">// gastronomia</div>
+        <h2>Sabores que <span class="hl">marcam</span></h2>
         <p>
-            Boa comida e tao importante quanto boa musica. Aqui estao os pratos que definem
-            meus momentos favoritos a mesa.
+            Boa comida tem o mesmo efeito de uma boa musica — marca um momento
+            e voce nunca mais esquece.
         </p>
         <div class="food-grid">
             <div class="food-card">
                 <img src="https://images.unsplash.com/photo-1544025162-d76694265947?w=600&q=80" alt="Churrasco" loading="lazy">
-                <div class="info">
+                <div class="fc-body">
                     <h3>Churrasco</h3>
-                    <p>Picanha na brasa com farofa e vinagrete. Classico e insubstituivel.</p>
+                    <p>Picanha na brasa, farofa, vinagrete. O classico que nunca falha.</p>
                 </div>
             </div>
             <div class="food-card">
                 <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?w=600&q=80" alt="Sushi" loading="lazy">
-                <div class="info">
+                <div class="fc-body">
                     <h3>Sushi</h3>
-                    <p>Precisao e equilibrio em cada peca. A arte da culinaria japonesa.</p>
+                    <p>Precisao e equilibrio em cada peca. Arte japonesa no prato.</p>
                 </div>
             </div>
             <div class="food-card">
                 <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80" alt="Pizza" loading="lazy">
-                <div class="info">
+                <div class="fc-body">
                     <h3>Pizza Artesanal</h3>
-                    <p>Massa fermentada, molho fresco, queijo derretendo. Conforto puro.</p>
+                    <p>Massa lenta, queijo derretendo, molho fresco. Conforto puro.</p>
                 </div>
             </div>
         </div>
@@ -410,50 +718,53 @@
 
     <div class="divider"></div>
 
-    <!-- QUOTE -->
+    <!-- CLOSING -->
     <section class="fade-up">
-        <div class="section-subtitle">Filosofia</div>
-        <h2>Uma <span>Frase</span></h2>
-        <div class="quote-block">
-            <p>"A mente que se abre a uma nova ideia jamais volta ao seu tamanho original."</p>
-            <cite>— Albert Einstein</cite>
+        <div class="section-label">// filosofia</div>
+        <h2>Uma <span class="hl">frase</span></h2>
+        <div class="quote">
+            <p>"O que foi vivido com verdade permanece dentro da gente.
+               Sem reservas. Sem prazo. Sem amar pela metade."</p>
+            <cite>&#8212; SrChZ</cite>
         </div>
         <p>
-            Cada playlist, cada sabor, cada traco de personalidade aponta na mesma direcao:
-            construir, aprender, evoluir. Essa biografia musical e um retrato de quem eu sou —
-            e de quem estou me tornando.
+            Cada musica curtida, cada linha de codigo, cada prato na mesa, cada traco
+            de personalidade — tudo aponta na mesma direcao: construir com intencao,
+            viver com profundidade, entregar com resultado.
+        </p>
+        <p>
+            Essa e a biografia. Nao do que eu faco — do que eu sou.
         </p>
     </section>
 
     <!-- FOOTER -->
     <footer>
-        <p>Biografia Musical &mdash; Rafael Cordeiro</p>
-        <p style="margin-top: 0.5rem;"><a href="https://github.com/WebSrChZ" target="_blank">github.com/WebSrChZ</a></p>
+        <a href="https://github.com/WebSrChZ" target="_blank" rel="noopener">github.com/WebSrChZ</a>
+        <div class="handle">@srchz</div>
     </footer>
+
 </main>
 
 <script>
     const gate = document.getElementById('video-gate');
     const video = document.getElementById('gate-video');
-    const main = document.querySelector('main');
+    const mainEl = document.querySelector('main');
 
     video.addEventListener('ended', unlockContent);
 
     function unlockContent() {
         gate.classList.add('hidden');
-        main.classList.add('visible');
+        mainEl.classList.add('visible');
         video.pause();
     }
 
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) e.target.classList.add('visible');
         });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+    document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 </script>
 
 </body>
