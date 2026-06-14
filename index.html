@@ -2,17 +2,39 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Biografia Musical — SrChZ</title>
+    <meta name="description" content="A trilha sonora, a mente e os pedaços que montam quem eu sou. Biografia interativa de Rafael Santos (SrChZ) — música, personalidade e convicção.">
+    <meta name="author" content="Rafael Santos (SrChZ)">
+    <meta name="theme-color" content="#050505">
+    <link rel="canonical" href="https://websrchz.github.io/BiografiaMusical/">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Biografia Musical — SrChZ">
+    <meta property="og:description" content="A trilha sonora, a mente e os pedaços que montam quem eu sou.">
+    <meta property="og:image" content="https://websrchz.github.io/BiografiaMusical/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://websrchz.github.io/BiografiaMusical/">
+    <meta property="og:locale" content="pt_BR">
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Biografia Musical — SrChZ">
+    <meta name="twitter:description" content="A trilha sonora, a mente e os pedaços que montam quem eu sou.">
+    <meta name="twitter:image" content="https://websrchz.github.io/BiografiaMusical/assets/og-image.png">
+    <!-- Favicon (nota musical roxa, inline) -->
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%238b5cf6'%3E%E2%99%AA%3C/text%3E%3C/svg%3E">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap');
 
         :root {
             --bg: #050505;
             --surface: #0d0d0d;
             --border: rgba(255,255,255,0.06);
             --text: #e0e0e0;
-            --muted: #666;
+            --muted: #8a8a8a;
             --accent: #8b5cf6;
             --accent2: #a78bfa;
             --pink: #ec4899;
@@ -458,9 +480,29 @@
             .now-playing { flex-direction: column; text-align: center; }
             .playlist-grid { grid-template-columns: 1fr; }
         }
+
+        /* === REDUCED MOTION (acessibilidade) === */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.001ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.001ms !important;
+                scroll-behavior: auto !important;
+            }
+            .fade-up { opacity: 1 !important; transform: none !important; }
+            #skip-btn { opacity: 1 !important; }
+        }
     </style>
 </head>
 <body>
+
+<!-- Sem JS: revela o conteúdo e esconde o gate (senão a página fica em branco) -->
+<noscript>
+    <style>
+        #video-gate { display: none !important; }
+        main { opacity: 1 !important; }
+    </style>
+</noscript>
 
 <!-- VIDEO GATE -->
 <div id="video-gate">
@@ -479,8 +521,8 @@
         <div class="hero-tag">// biografia musical</div>
         <h1>SrChZ</h1>
         <p class="hero-sub">
-            Eu sou <strong>Rafael Santos</strong> — e essa e a trilha sonora, a mente e os pedacos
-            que montam quem eu sou quando ninguem ta olhando.
+            Eu sou <strong>Rafael Santos</strong> — e essa é a trilha sonora, a mente e os pedaços
+            que montam quem eu sou quando ninguém tá olhando.
         </p>
         <div class="scroll-arrow"></div>
     </div>
@@ -493,21 +535,21 @@
             <span class="key">nome</span>: <span class="val">Rafael Santos</span><br>
             <span class="key">aka</span>: <span class="val">SrChZ</span><br>
             <span class="key">tipo</span>: <span class="val">INTJ-A &mdash; O Arquiteto</span><br>
-            <span class="key">titulo</span>: <span class="val">Arquiteto de Ecossistemas Digitais</span><br>
+            <span class="key">título</span>: <span class="val">Arquiteto de Ecossistemas Digitais</span><br>
             <span class="key">stack</span>: <span class="val">JavaScript, Node.js, Supabase, Python, FFmpeg</span><br>
             <span class="key">empresa</span>: <span class="val">SrChZ Technologies</span><br>
             <span class="key">projeto</span>: <span class="val">ITS Power &mdash; Ecossistema de Desejo</span><br>
-            <span class="key">formacao</span>: <span class="val">Eng. Computacao, Ed. Fisica, Pedagogia, Psicanalise</span><br>
+            <span class="key">formação</span>: <span class="val">Eng. Computação, Ed. Física, Pedagogia, Psicanálise</span><br>
             <span class="key">idiomas</span>: <span class="val">PT (nativo), EN (C1), JP (A2)</span><br>
             <span class="key">nascimento</span>: <span class="val">02/12/2004</span><br>
-            <span class="key">neurodivergencia</span>: <span class="val">TEA nivel 1 (Asperger) + AH/SD (superdotacao)</span><br>
-            <span class="key">experiencia</span>: <span class="val">Meta &mdash; CX Specialist III (Senior)</span><br>
-            <span class="key">localizacao</span>: <span class="val">Claudio/Divinopolis, MG</span><br>
-            <span class="key">modo</span>: <span class="val">empresario, nao freelancer</span><br>
-            <span class="key">estrategia</span>: <span class="val">Descoberta de Narrativa</span><br>
-            <span class="key">estetica</span>: <span class="val">Dark Tech</span><br>
+            <span class="key">neurodivergência</span>: <span class="val">TEA nível 1 (Asperger) + AH/SD (superdotação)</span><br>
+            <span class="key">experiência</span>: <span class="val">Meta &mdash; CX Specialist III (Senior)</span><br>
+            <span class="key">localização</span>: <span class="val">Cláudio/Divinópolis, MG</span><br>
+            <span class="key">modo</span>: <span class="val">empresário, não freelancer</span><br>
+            <span class="key">estratégia</span>: <span class="val">Descoberta de Narrativa</span><br>
+            <span class="key">estética</span>: <span class="val">Dark Tech</span><br>
             <span class="key">instagram</span>: <span class="val">@websrchz</span><br>
-            <span class="key">musicas_curtidas</span>: <span class="val">2.934</span><br>
+            <span class="key">músicas_curtidas</span>: <span class="val">2.934</span><br>
             <span class="key">vibe</span>: <span class="val">slowed + reverb, phonk, trap BR</span><br>
         </div>
     </section>
@@ -519,70 +561,70 @@
         <div class="section-label">// personalidade</div>
         <div class="intj-header">
             <h2>INTJ — O <span class="hl">Arquiteto</span></h2>
-            <span class="intj-badge">2% da populacao</span>
+            <span class="intj-badge">2% da população</span>
         </div>
         <p>
-            Nao me defino pelo que faco. Defino pelo que entendo. Observador,
-            estrategista, solucionador — profissoes sao ferramentas, nao identidade.
-            Quando algo nao funciona, desmonto o mecanismo ate achar a falha.
+            Não me defino pelo que faço. Defino pelo que entendo. Observador,
+            estrategista, solucionador — profissões são ferramentas, não identidade.
+            Quando algo não funciona, desmonto o mecanismo até achar a falha.
         </p>
         <p>
-            Minha curiosidade nao e "que interessante". E <strong>"por que isso
+            Minha curiosidade não é "que interessante". É <strong>"por que isso
             aconteceu? qual foi a causa da causa?"</strong> Raramente aceito a
-            primeira explicacao. Cada linha de codigo, cada beat, cada decisao
-            passa pelo mesmo filtro: faz sentido ou nao faz.
+            primeira explicação. Cada linha de código, cada beat, cada decisão
+            passa pelo mesmo filtro: faz sentido ou não faz.
         </p>
         <p>
-            O paradoxo: pareco independente, mas sou profundamente conectado.
-            Pareco racional, mas sou intensamente emocional. Pareco forte,
-            mas injustica me atinge no osso — senso de justica estrutural,
-            nao legal. <strong>Quando amo, e pra vida toda.</strong>
+            O paradoxo: pareço independente, mas sou profundamente conectado.
+            Pareço racional, mas sou intensamente emocional. Pareço forte,
+            mas injustiça me atinge no osso — senso de justiça estrutural,
+            não legal. <strong>Quando amo, é pra vida toda.</strong>
         </p>
         <p>
-            Minha maior dor e <strong>distorcao</strong> — ser mal interpretado ou
-            reduzido a uma funcao. Resistencia ao superficial. Busca de profundidade,
-            significado, essencia. Detecto inconsistencias automaticamente — como
-            Hisoka, domino o ambiente com regras proprias.
+            Minha maior dor é <strong>distorção</strong> — ser mal interpretado ou
+            reduzido a uma função. Resistência ao superficial. Busca de profundidade,
+            significado, essência. Detecto inconsistências automaticamente — como
+            Hisoka, domino o ambiente com regras próprias.
         </p>
         <p>
-            Fui diagnosticado com <strong>TEA nivel 1 (Asperger)</strong> e
-            <strong>Altas Habilidades/Superdotacao</strong> (Renzulli: 134/150).
+            Fui diagnosticado com <strong>TEA nível 1 (Asperger)</strong> e
+            <strong>Altas Habilidades/Superdotação</strong> (Renzulli: 134/150).
             Tenho hipersensibilidade sensorial a sons, luzes, cheiros e toques.
-            14 irmaos de diferentes relacoes. Nasci prematuro, andei aos 8 meses,
-            preferia "fazer experiencias" a brincar. Alexitimia baixa — identifico
-            emocoes com clareza. Minha ansiedade e depressao sao minimas.
-            Nao e diagnostico — e meu sistema operacional.
+            14 irmãos de diferentes relações. Nasci prematuro, andei aos 8 meses,
+            preferia "fazer experiências" a brincar. Alexitimia baixa — identifico
+            emoções com clareza. Minha ansiedade e depressão são mínimas.
+            Não é diagnóstico — é meu sistema operacional.
         </p>
         <div class="traits">
             <div class="trait">
                 <div class="trait-icon">&#x1F9E0;</div>
                 <h3>Estrategista</h3>
-                <p>Meu arquetipo primario. Penso em sistemas, nao em tarefas. Ja calculei tres cenarios antes de voce terminar a frase</p>
+                <p>Meu arquétipo primário. Penso em sistemas, não em tarefas. Já calculei três cenários antes de você terminar a frase</p>
             </div>
             <div class="trait">
                 <div class="trait-icon">&#x1F4D6;</div>
-                <h3>Sabio</h3>
-                <p>Meu arquetipo secundario. Nao quero saber — quero entender. Desmonto o mecanismo ate a ultima peca</p>
+                <h3>Sábio</h3>
+                <p>Meu arquétipo secundário. Não quero saber — quero entender. Desmonto o mecanismo até a última peça</p>
             </div>
             <div class="trait">
                 <div class="trait-icon">&#x1F3D7;&#xFE0F;</div>
                 <h3>Construtor</h3>
-                <p>Meu arquetipo terciario. Construo ecossistemas, nao entregas avulsas. Cada projeto meu e uma peca de algo maior</p>
+                <p>Meu arquétipo terciário. Construo ecossistemas, não entregas avulsas. Cada projeto meu é uma peça de algo maior</p>
             </div>
             <div class="trait">
                 <div class="trait-icon">&#x2694;&#xFE0F;</div>
                 <h3>Guerreiro</h3>
-                <p>Meu arquetipo oculto. Fracasso eu encaro. Dor eu encaro. Canalizo impulso via treino e construcao</p>
+                <p>Meu arquétipo oculto. Fracasso eu encaro. Dor eu encaro. Canalizo impulso via treino e construção</p>
             </div>
             <div class="trait">
                 <div class="trait-icon">&#x1F50D;</div>
                 <h3>Investigador</h3>
-                <p>Desmonto pessoas, sistemas, emocoes e narrativas. Busco a causa da causa da causa</p>
+                <p>Desmonto pessoas, sistemas, emoções e narrativas. Busco a causa da causa da causa</p>
             </div>
             <div class="trait">
                 <div class="trait-icon">&#x1F30C;</div>
                 <h3>Leal</h3>
-                <p>Poucos entram. Quem entra, fica pra sempre. Minha lealdade e absoluta, sem prazo</p>
+                <p>Poucos entram. Quem entra, fica pra sempre. Minha lealdade é absoluta, sem prazo</p>
             </div>
         </div>
     </section>
@@ -592,11 +634,11 @@
     <!-- MUSIC -->
     <section class="fade-up">
         <div class="section-label">// trilha sonora</div>
-        <h2>O que ta <span class="hl">tocando</span></h2>
+        <h2>O que tá <span class="hl">tocando</span></h2>
         <p>
-            2.934 musicas curtidas. Slowed + reverb quando o mundo precisa desacelerar.
-            Phonk quando precisa acelerar. Trap BR quando a energia e brasileira.
-            Sem playlist generica — cada uma e um estado de espirito.
+            2.934 músicas curtidas. Slowed + reverb quando o mundo precisa desacelerar.
+            Phonk quando precisa acelerar. Trap BR quando a energia é brasileira.
+            Sem playlist genérica — cada uma é um estado de espírito.
         </p>
 
         <!-- Now Playing -->
@@ -606,13 +648,13 @@
             </div>
             <div class="np-info">
                 <div class="np-label">tocando agora</div>
-                <div class="np-track">Lembranca</div>
+                <div class="np-track">Lembrança</div>
                 <div class="np-artist">MC Menor da L, MACIH</div>
             </div>
         </div>
 
         <!-- Recent Liked -->
-        <h3 style="color: #fff; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Ultimas curtidas</h3>
+        <h3 style="color: #fff; font-size: 0.9rem; font-weight: 600; margin-bottom: 0.5rem;">Últimas curtidas</h3>
         <ul class="track-list">
             <li>
                 <span class="track-num">01</span>
@@ -689,16 +731,16 @@
 
     <!-- ARTISTAS -->
     <section class="fade-up">
-        <div class="section-label">// artistas em rotacao</div>
+        <div class="section-label">// artistas em rotação</div>
         <h2>Quem <span class="hl">domina</span> meu Spotify</h2>
         <p>
-            Os nomes que aparecem de novo e de novo nas minhas curtidas. Nao e algoritmo —
-            e meu gosto construido.
+            Os nomes que aparecem de novo e de novo nas minhas curtidas. Não é algoritmo —
+            é meu gosto construído.
         </p>
         <div class="traits">
             <div class="trait">
                 <h3>LONOWN</h3>
-                <p>Slowed/reverb atmosferico. Aparece em quase tudo</p>
+                <p>Slowed/reverb atmosférico. Aparece em quase tudo</p>
             </div>
             <div class="trait">
                 <h3>riserayss</h3>
@@ -714,7 +756,7 @@
             </div>
             <div class="trait">
                 <h3>IZA</h3>
-                <p>Pop/R&B brasileiro com potencia vocal absurda</p>
+                <p>Pop/R&B brasileiro com potência vocal absurda</p>
             </div>
             <div class="trait">
                 <h3>Ana Castela</h3>
@@ -730,22 +772,22 @@
         <div class="section-label">// gastronomia</div>
         <h2>Sabores que <span class="hl">marcam</span></h2>
         <p>
-            Pra mim, boa comida tem o mesmo efeito de uma boa musica — marca um momento
-            e eu nunca mais esqueco.
+            Pra mim, boa comida tem o mesmo efeito de uma boa música — marca um momento
+            e eu nunca mais esqueço.
         </p>
         <div class="food-grid">
             <div class="food-card">
                 <img src="https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=600&q=80" alt="Churrasco" loading="lazy">
                 <div class="fc-body">
                     <h3>Churrasco</h3>
-                    <p>Picanha na brasa, farofa, vinagrete. O classico que nunca falha.</p>
+                    <p>Picanha na brasa, farofa, vinagrete. O clássico que nunca falha.</p>
                 </div>
             </div>
             <div class="food-card">
                 <img src="https://images.unsplash.com/photo-1585032226651-759b368d7246?auto=format&fit=crop&w=600&q=80" alt="Sushi" loading="lazy">
                 <div class="fc-body">
                     <h3>Sushi</h3>
-                    <p>Precisao e equilibrio em cada peca. Arte japonesa no prato.</p>
+                    <p>Precisão e equilíbrio em cada peça. Arte japonesa no prato.</p>
                 </div>
             </div>
             <div class="food-card">
@@ -762,17 +804,17 @@
 
     <!-- CONVICÇÃO -->
     <section class="fade-up">
-        <div class="section-label">// conviccao</div>
-        <h2>Fe <span class="hl">nao e cega</span></h2>
+        <div class="section-label">// convicção</div>
+        <h2>Fé <span class="hl">não é cega</span></h2>
         <div class="quote">
-            <p>"A fe e a expectativa certa de coisas esperadas, a demonstracao
-               evidente de realidades que nao se veem."</p>
+            <p>"A fé é a expectativa certa de coisas esperadas, a demonstração
+               evidente de realidades que não se veem."</p>
             <cite>&#8212; Hebreus 11:1</cite>
         </div>
         <p>
-            Nao acredito no acaso. Cada decisao, cada projeto, cada movimento tem
-            fundamento — uma base solida por tras. A mesma logica que aplico no
-            codigo, aplico na vida: testar, validar, confiar no que funciona.
+            Não acredito no acaso. Cada decisão, cada projeto, cada movimento tem
+            fundamento — uma base sólida por tras. A mesma lógica que aplico no
+            código, aplico na vida: testar, validar, confiar no que funciona.
         </p>
     </section>
 
@@ -787,26 +829,26 @@
             <cite>&#8212; SrChZ</cite>
         </div>
         <p>
-            Se voce removesse profissao, dinheiro, aparencia, status — e deixasse
-            so a estrutura central — o que sobra e alguem movido por <strong>compreensao</strong>.
-            Nao apenas saber. Entender. Desmontar o mecanismo ate a ultima peca.
+            Se você removesse profissão, dinheiro, aparência, status — e deixasse
+            só a estrutura central — o que sobra é alguém movido por <strong>compreensão</strong>.
+            Não apenas saber. Entender. Desmontar o mecanismo até a última peça.
         </p>
         <p>
-            O video e o veiculo. A musica e a trilha. O codigo e a ferramenta.
-            Profissoes sao funcoes — nao identidade. O que importa e o que voce
-            constroi com tudo isso: ecossistemas, nao entregas avulsas.
+            O vídeo é o veículo. A música é a trilha. O código é a ferramenta.
+            Profissões são funções — não identidade. O que importa é o que você
+            constrói com tudo isso: ecossistemas, não entregas avulsas.
         </p>
         <p>
-            Meu maior medo nao e fracasso. Fracasso eu encaro. Dor eu encaro.
-            Meu maior medo e <strong>viver uma vida que nao represente quem eu
+            Meu maior medo não é fracasso. Fracasso eu encaro. Dor eu encaro.
+            Meu maior medo e <strong>viver uma vida que não represente quem eu
             realmente sou</strong>.
         </p>
         <div class="quote">
-            <p>"Ela querendo, esperaria ate 1000."</p>
+            <p>"Ela querendo, esperaria até 1000."</p>
             <cite>&#8212; SrChZ</cite>
         </div>
         <p>
-            Essa e a biografia. Nao do que eu faco — do que eu sou.
+            Essa é a biografia. Não do que eu faço — do que eu sou.
         </p>
     </section>
 
@@ -815,7 +857,7 @@
         <a href="https://github.com/WebSrChZ" target="_blank" rel="noopener">github.com/WebSrChZ</a>
         &nbsp;&middot;&nbsp;
         <a href="https://instagram.com/websrchz" target="_blank" rel="noopener">@websrchz</a>
-        <div class="handle">Claudio/Divinopolis, MG</div>
+        <div class="handle">Cláudio/Divinópolis, MG</div>
     </footer>
 
 </main>
@@ -824,13 +866,21 @@
     const gate = document.getElementById('video-gate');
     const video = document.getElementById('gate-video');
     const mainEl = document.querySelector('main');
+    const skipBtn = document.getElementById('skip-btn');
 
-    video.addEventListener('ended', unlockContent);
+    if (video) video.addEventListener('ended', unlockContent);
+
+    // Se o vídeo não carregar, libera o "pular" na hora (não prende o visitante)
+    if (video) video.addEventListener('error', () => {
+        if (skipBtn) { skipBtn.style.animation = 'none'; skipBtn.style.opacity = '1'; }
+        const label = document.querySelector('.gate-label');
+        if (label) label.textContent = 'vídeo indisponível';
+    });
 
     function unlockContent() {
-        gate.classList.add('hidden');
-        mainEl.classList.add('visible');
-        video.pause();
+        if (gate) gate.classList.add('hidden');
+        if (mainEl) mainEl.classList.add('visible');
+        if (video) video.pause();
     }
 
     const obs = new IntersectionObserver((entries) => {
