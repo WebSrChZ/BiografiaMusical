@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://websrchz.github.io/BiografiaMusical/sitemap.xml
