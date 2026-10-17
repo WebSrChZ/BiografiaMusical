@@ -1,0 +1,19 @@
+name: PR checks
+
+# A pagina vai ao ar direto do repositorio via GitHub Pages. Verificacao so com
+# a stdlib do Python: nada para instalar.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  static:
+    name: HTML, JSON-LD, XML e links internos
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verificacao estatica
+        run: python3 tools/check_site.py .
