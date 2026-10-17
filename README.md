@@ -33,8 +33,14 @@ python -m http.server 8000
 # abra http://localhost:8000
 ```
 
+Antes de abrir PR, a mesma verificação que roda no CI:
+
+```bash
+python3 tools/check_site.py .
+```
+
 ---
 
 <div align="center">
-<sub>© 2026 SrChZ — projeto pessoal.</sub>
+<sub>© 2026 SrChZ — projeto pessoal. O trabalho profissional fica em <a href="https://www.srchz-technologies.com.br">SrChZ Technologies</a>.</sub>
 </div>
