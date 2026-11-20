@@ -393,6 +393,44 @@
             border-radius: 10px;
             border: 1px solid var(--border);
         }
+        .playlist-facade {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            height: 152px;
+            padding: 0 1.25rem;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            background: linear-gradient(135deg, rgba(30, 215, 96, 0.12), var(--surface) 60%);
+            color: var(--text);
+            text-decoration: none;
+            transition: border-color 0.2s, transform 0.2s;
+        }
+        .playlist-facade:hover,
+        .playlist-facade:focus-visible {
+            border-color: #1ed760;
+            transform: translateY(-2px);
+        }
+        .pf-play {
+            flex: none;
+            position: relative;
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: #1ed760;
+        }
+        .pf-play::after {
+            content: "";
+            position: absolute;
+            left: 20px;
+            top: 16px;
+            border-style: solid;
+            border-width: 10px 0 10px 16px;
+            border-color: transparent transparent transparent #050505;
+        }
+        .pf-txt { display: flex; flex-direction: column; gap: 0.3rem; }
+        .pf-txt b { color: #fff; font-size: 1rem; font-weight: 600; }
+        .pf-txt small { color: var(--muted); font-size: 0.8rem; }
 
         /* === FOOD === */
         .food-grid {
@@ -750,15 +788,19 @@
         </ul>
 
         <!-- Playlists -->
+        <!-- Os players do Spotify só carregam no clique (20/11/2026): carregados
+             com a página, deixavam cookies de terceiros no visitante antes de ele
+             tocar em nada (Lighthouse, boas práticas 79). Sem JavaScript, o link
+             abre a playlist no Spotify. -->
         <h3 style="color: #fff; font-size: 0.9rem; font-weight: 600; margin: 2.5rem 0 0.5rem;">Playlists do Spotify</h3>
         <p>As playlists que realmente rodam no dia a dia.</p>
         <div class="playlist-grid">
-            <iframe src="https://open.spotify.com/embed/playlist/23wnppW1xGaJbcleF4dkEj" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="Eletronic"></iframe>
-            <iframe src="https://open.spotify.com/embed/playlist/0EZpNqUeVCabRBctYZDjpH" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="Ugh..."></iframe>
+            <a class="playlist-facade" href="https://open.spotify.com/playlist/23wnppW1xGaJbcleF4dkEj" target="_blank" rel="noopener" data-playlist="23wnppW1xGaJbcleF4dkEj" data-title="Eletronic"><span class="pf-play" aria-hidden="true"></span><span class="pf-txt"><b>Eletronic</b><small>Ouvir no Spotify</small></span></a>
+            <a class="playlist-facade" href="https://open.spotify.com/playlist/0EZpNqUeVCabRBctYZDjpH" target="_blank" rel="noopener" data-playlist="0EZpNqUeVCabRBctYZDjpH" data-title="Ugh..."><span class="pf-play" aria-hidden="true"></span><span class="pf-txt"><b>Ugh...</b><small>Ouvir no Spotify</small></span></a>
         </div>
         <div class="playlist-grid" style="margin-top: 1rem;">
-            <iframe src="https://open.spotify.com/embed/playlist/1CAltJdcKeKnZMYITiDW2r" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="EUA - Dark Romance"></iframe>
-            <iframe src="https://open.spotify.com/embed/playlist/4L60g9tKWIZk0mpLgeW8ZA" height="152" frameBorder="0" allow="encrypted-media" loading="lazy" title="Dark Instrumental"></iframe>
+            <a class="playlist-facade" href="https://open.spotify.com/playlist/1CAltJdcKeKnZMYITiDW2r" target="_blank" rel="noopener" data-playlist="1CAltJdcKeKnZMYITiDW2r" data-title="EUA - Dark Romance"><span class="pf-play" aria-hidden="true"></span><span class="pf-txt"><b>EUA - Dark Romance</b><small>Ouvir no Spotify</small></span></a>
+            <a class="playlist-facade" href="https://open.spotify.com/playlist/4L60g9tKWIZk0mpLgeW8ZA" target="_blank" rel="noopener" data-playlist="4L60g9tKWIZk0mpLgeW8ZA" data-title="Dark Instrumental"><span class="pf-play" aria-hidden="true"></span><span class="pf-txt"><b>Dark Instrumental</b><small>Ouvir no Spotify</small></span></a>
         </div>
     </section>
 
@@ -929,6 +971,21 @@
     }, { threshold: 0.12 });
 
     document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+    // Player do Spotify só no clique: troca o cartão pelo iframe, do mesmo tamanho.
+    document.querySelectorAll('.playlist-facade').forEach((a) => {
+        a.addEventListener('click', (e) => {
+            e.preventDefault();
+            const f = document.createElement('iframe');
+            f.src = 'https://open.spotify.com/embed/playlist/' + a.dataset.playlist;
+            f.height = '152';
+            f.setAttribute('frameborder', '0');
+            f.allow = 'encrypted-media';
+            f.title = a.dataset.title;
+            a.replaceWith(f);
+            f.focus();
+        });
+    });
 </script>
 
 </body>
