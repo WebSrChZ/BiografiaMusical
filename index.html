@@ -56,6 +56,8 @@
     <meta name="twitter:image:alt" content="Biografia Musical — SrChZ">
     <!-- Favicon (nota musical roxa, inline) -->
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23050505'/%3E%3Ctext x='16' y='23' font-size='20' text-anchor='middle' fill='%238b5cf6'%3E%E2%99%AA%3C/text%3E%3C/svg%3E">
+    <!-- Capa do vídeo de abertura: é a primeira coisa grande da tela -->
+    <link rel="preload" as="image" href="assets/abertura-capa.webp" fetchpriority="high">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;700&display=swap">
@@ -111,6 +113,12 @@
             margin-bottom: 1.5rem;
         }
         #gate-video {
+            /* Caixa em 16:9 desde o primeiro quadro: sem ela, o vídeo nascia
+               com 300x150 e crescia quando chegavam os metadados (CLS 0,037) */
+            width: min(88vw, calc(65vh * 16 / 9));
+            height: auto;
+            aspect-ratio: 16 / 9;
+            background: #000;
             max-width: 88vw;
             max-height: 65vh;
             border-radius: 12px;
@@ -579,7 +587,7 @@
 <!-- VIDEO GATE -->
 <div id="video-gate">
     <div class="gate-label">antes de entrar</div>
-    <video id="gate-video" controls preload="metadata">
+    <video id="gate-video" controls preload="metadata" poster="assets/abertura-capa.webp">
         <source src="assets/INTJ.SUPREMACY.mp4" type="video/mp4">
     </video>
     <button id="skip-btn" onclick="unlockContent()">pular</button>
